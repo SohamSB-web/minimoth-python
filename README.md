@@ -1,19 +1,19 @@
-# WhatsApp-First Authentication Boilerplate (React + Node.js)
+# WhatsApp-First Authentication Boilerplate (Python & React)
 
-A production-ready, frictionless WhatsApp OTP authentication boilerplate built for hackathons and rapid prototyping. Powered by **React (Vite)**, **Node.js/Express**, and the official **[Minimoth Node SDK](https://minimoth.dev)**.
+A production-ready, frictionless WhatsApp OTP authentication boilerplate built for hackathons and rapid prototyping. Powered by **Python (Flask)**, **React (Vite)**, and **[Minimoth](https://minimoth.dev)**.
 
 ---
 
 ## Features
 
 - **WhatsApp-First Login**: Instant OTP delivery directly to user WhatsApp without SMS carrier latency or DND delivery drops.
-- **Official Minimoth SDK**: Uses `@minimoth/sdk-node` (`MiniMoth`) for clean, secure OTP dispatch and verification.
-- **Modern React Components**: Modular structure with Vite, Lucide icons, and responsive state handling:
+- **Python Backend**: Clean, lightweight Flask backend (`server.py` & `minimoth.py`) integrating Minimoth OTP dispatch and verification endpoints.
+- **Modern React Components**: Modular frontend with Vite, Lucide icons, responsive dark-mode aesthetic, and fluid states:
   1. **Phone Input Screen**: Country code prefix, clean number input, and instant validation.
   2. **OTP Verification Screen**: 6-digit individual passcode inputs with auto-advance, backspace handling, paste support, and a 30s resend cooldown timer.
   3. **Authenticated Dashboard**: Shows verified phone number, Session ID, and copyable JWT tokens (`accessToken`, `refreshToken`) with properly proportioned controls.
 - **Refined Aesthetics**: Deep dark slate glassmorphism, glowing emerald WhatsApp accents, micro-animations, loading spinners, and toast notifications.
-- **Zero-Friction Dev Setup**: Run both the Express API and Vite React frontend with a single command (`npm run dev`).
+- **Zero-Friction Dev Setup**: Run both the Python API and Vite React frontend concurrently with `npm run dev`.
 
 ---
 
@@ -23,14 +23,16 @@ A production-ready, frictionless WhatsApp OTP authentication boilerplate built f
 minimoth/
 ├── .env.example              # Example environment variables
 ├── .env                      # Local environment variables (API Key & Port)
-├── package.json              # Project scripts and dependencies
+├── server.py                 # Python Flask backend server
+├── minimoth.py               # Minimoth Python client (send & verify OTP)
+├── requirements.txt          # Python dependencies
+├── package.json              # Project scripts and React dependencies
 ├── vite.config.mjs           # Vite config with React plugin & API proxy
-├── server.js                 # Express backend with Minimoth SDK
 ├── index.html                # Vite React HTML entry
 ├── src/
 │   ├── main.jsx              # React mounting root
 │   ├── App.jsx               # Application controller & state machine
-│   ├── index.css             # Refined CSS design system & micro-interactions
+│   ├── index.css             # Refined CSS design tokens & animations
 │   └── components/
 │       ├── Header.jsx        # Branding badge, logo & setup alerts
 │       ├── LoginScreen.jsx   # Phone input & send OTP flow
@@ -45,10 +47,18 @@ minimoth/
 ## Quickstart Guide
 
 ### 1. Prerequisites
-- **Node.js** v18 or higher installed on your machine.
+- **Python** 3.9+ installed.
+- **Node.js** 18+ installed.
 - A **Minimoth** account & API key (Get one from [Minimoth Dashboard](https://minimoth.dev)).
 
 ### 2. Install Dependencies
+
+**Python Dependencies:**
+```bash
+pip install -r requirements.txt
+```
+
+**Frontend Dependencies:**
 ```bash
 npm install
 ```
@@ -61,20 +71,19 @@ PORT=3000
 ```
 
 ### 4. Start the Application
-Run the full-stack development environment:
 
+**Development Mode (Concurrent Python API + Vite React hot-reloading):**
 ```bash
-# Starts both Express API (:3000) and Vite React app (:5173) concurrently:
 npm run dev
 ```
 
-Or build and serve in production mode:
+**Production Mode:**
 ```bash
-# Build React bundle:
+# 1. Build the React frontend:
 npm run build
 
-# Start Express server (serves the built React app on port 3000):
-npm start
+# 2. Run the Python backend:
+python server.py
 ```
 
 Visit **[http://localhost:3000](http://localhost:3000)** (or `http://localhost:5173` during `npm run dev`) in your browser.

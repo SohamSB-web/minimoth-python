@@ -1,6 +1,14 @@
 # Dependencies
 node_modules/
 
+# Python Cache & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+
 # Environment Variables (Keep API keys secret!)
 .env
 .env.local
